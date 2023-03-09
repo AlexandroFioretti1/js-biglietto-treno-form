@@ -26,10 +26,12 @@ const ticketPreviewEl = document.getElementById("final_ticket");
 
 /* differenza di prezzo in base all'età */
 generateBtn.addEventListener("click", function () {
+  const name = document.getElementById("name_surname").value;
   const age = document.getElementById("age").value;
   const km = Number(document.getElementById("km").value);
   const costForKm = 0.21;
-
+  const carrozze = Math.floor(Math.random() * 18) + 1;
+  const cpCode = Math.floor(Math.random() * 9999) + 90000;
   let finalPrice = km * costForKm;
 
   switch (age) {
@@ -38,17 +40,29 @@ generateBtn.addEventListener("click", function () {
       console.log(
         `Prezzo minorenne: ${(Math.round(finalPrice * 100) / 100).toFixed(2)}€`
       );
+      console.log(name);
+      document.getElementById("offerta").innerHTML = "Biglietto Minorenne";
+      finalPrice = Math.round(finalPrice * 100) / 100 + "€";
       break;
     case "over65":
       finalPrice *= 0.6;
       console.log(
         `Prezzo over 65: ${(Math.round(finalPrice * 100) / 100).toFixed(2)}€`
       );
+      document.getElementById("offerta").innerHTML = "Biglietto Anziano";
+      finalPrice = (Math.round(finalPrice * 100) / 100).toFixed(2) + "€";
       break;
     default:
       console.log(
         `Prezzo maggiorenne: ${(Math.round(finalPrice * 100) / 100).toFixed(2)}€`
       );
+      finalPrice = (Math.round(finalPrice * 100) / 100).toFixed(2) + "€";
+      document.getElementById("offerta").innerHTML = "Biglietto Standard";
   }
+  document.getElementById("passeggero_nome").innerHTML = name;
+  document.getElementById("carrozza").innerHTML = String(carrozze);
+  document.getElementById("cpCode").innerHTML = String(cpCode);
+  document.getElementById("costo_biglietto").innerHTML = String(finalPrice);
+
   ticketPreviewEl.classList.remove("d-none");
 });
