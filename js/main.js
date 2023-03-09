@@ -18,3 +18,37 @@ TOOLS
 - If / else
 -const\let
 */
+
+/* const */
+const generateBtn = document.getElementById("generate");
+const resetBtn = document.getElementById("reset");
+const ticketPreviewEl = document.getElementById("final_ticket");
+
+/* differenza di prezzo in base all'età */
+generateBtn.addEventListener("click", function () {
+  const age = document.getElementById("age").value;
+  const km = Number(document.getElementById("km").value);
+  const costForKm = 0.21;
+
+  let finalPrice = km * costForKm;
+
+  switch (age) {
+    case "minorenne":
+      finalPrice *= 0.8;
+      console.log(
+        `Prezzo minorenne: ${(Math.round(finalPrice * 100) / 100).toFixed(2)}€`
+      );
+      break;
+    case "over65":
+      finalPrice *= 0.6;
+      console.log(
+        `Prezzo over 65: ${(Math.round(finalPrice * 100) / 100).toFixed(2)}€`
+      );
+      break;
+    default:
+      console.log(
+        `Prezzo maggiorenne: ${(Math.round(finalPrice * 100) / 100).toFixed(2)}€`
+      );
+  }
+  ticketPreviewEl.classList.remove("d-none");
+});
